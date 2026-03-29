@@ -451,6 +451,20 @@ projects:
       # ========== ADDED (not chainlist): extras we merged in after eth_chainId sanity checks ==========
       # (ids use prefix "extra-" for easy grep / removal)
 
+      # Alchemy / Infura (HTTPS; uses ALCHEMY_API_KEY / INFURA_API_KEY above)
+      - { id: extra-1-alchemy, type: evm, endpoint: "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 1 } }
+      - { id: extra-1-infura, type: evm, endpoint: "https://mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 1 } }
+      - { id: extra-10-alchemy, type: evm, endpoint: "https://opt-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 10 } }
+      - { id: extra-10-infura, type: evm, endpoint: "https://optimism-mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 10 } }
+      - { id: extra-137-alchemy, type: evm, endpoint: "https://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 137 } }
+      - { id: extra-137-infura, type: evm, endpoint: "https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 137 } }
+      - { id: extra-8453-alchemy, type: evm, endpoint: "https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 8453 } }
+      - { id: extra-8453-infura, type: evm, endpoint: "https://base-mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 8453 } }
+      - { id: extra-42161-alchemy, type: evm, endpoint: "https://arb-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 42161 } }
+      - { id: extra-42161-infura, type: evm, endpoint: "https://arbitrum-mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 42161 } }
+      - { id: extra-43114-alchemy, type: evm, endpoint: "https://avax-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}", evm: { chainId: 43114 } }
+      - { id: extra-43114-infura, type: evm, endpoint: "https://avalanche-mainnet.infura.io/v3/${INFURA_API_KEY}", evm: { chainId: 43114 } }
+
       # ADDED — Ethereum (1): 1RPC
       - { id: extra-1-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_1_1RPC}", evm: { chainId: 1 } }
 
