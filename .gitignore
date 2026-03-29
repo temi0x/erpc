@@ -11,7 +11,7 @@ vendor/
 *.cover
 coverage.txt
 .DS_Store
-erpc.yaml
+# erpc.yaml is tracked: endpoints use ${ERPC_RPC_*}; set values in .env (see .env.example) or the host env.
 erpc.ts
 .generated-go-semantic-release-changelog.md
 .semrel/

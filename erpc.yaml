@@ -1,0 +1,307 @@
+# eRPC config: every upstream `endpoint` uses ${ERPC_RPC_*}. Set values in `.env` (see .env.example)
+# or in your deployment platform's environment. `godotenv` loads `.env` from cwd on startup.
+#
+# Same sections as before: chainlist.wtf primary rows, then ADDED extras.
+
+logLevel: info
+
+database:
+  evmJsonRpcCache:
+    connectors:
+      - id: memory-cache
+        driver: memory
+    policies:
+      - network: "*"
+        method: "*"
+        finality: realtime
+        empty: allow
+        connector: memory-cache
+        ttl: 2s
+      - network: "*"
+        method: "*"
+        finality: unfinalized
+        empty: allow
+        connector: memory-cache
+        ttl: 10s
+      - network: "*"
+        method: "*"
+        finality: finalized
+        empty: allow
+        connector: memory-cache
+        ttl: 0
+
+server:
+  httpHostV4: 0.0.0.0
+  httpPortV4: 4000
+  maxTimeout: 50s
+
+metrics:
+  enabled: true
+  hostV4: 0.0.0.0
+  port: 4001
+
+projects:
+  - id: main
+    upstreamDefaults:
+      failsafe:
+        - matchMethod: "*"
+          timeout:
+            duration: 20s
+          retry:
+            maxAttempts: 2
+            delay: 400ms
+    networks:
+      - architecture: evm
+        evm:
+          chainId: 1
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 10
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 56
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 137
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 8453
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 42161
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 4
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 300ms
+          hedge:
+            delay: 1500ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 43114
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 59144
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 534352
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+
+    upstreams:
+      # ========== chainlist.wtf (primary) — omit ${INFURA_API_KEY} / ${ALCHEMY_API_KEY} rows ==========
+
+      # Ethereum (1) — https://chainlist.wtf/chain/1/
+      - { id: chainlist-1-mycrypto, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_MYCRYPTO}", evm: { chainId: 1 } }
+      - { id: chainlist-1-cloudflare, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_CLOUDFLARE}", evm: { chainId: 1 } }
+      - { id: chainlist-1-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_PUBLICNODE}", evm: { chainId: 1 } }
+      - { id: chainlist-1-tenderly, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_TENDERLY}", evm: { chainId: 1 } }
+      - { id: chainlist-1-blocknative-boost, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_BLOCKNATIVE_BOOST}", evm: { chainId: 1 } }
+      - { id: chainlist-1-flashbots, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_FLASHBOTS}", evm: { chainId: 1 } }
+      - { id: chainlist-1-flashbots-fast, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_FLASHBOTS_FAST}", evm: { chainId: 1 } }
+      - { id: chainlist-1-mevblocker, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_MEVBLOCKER}", evm: { chainId: 1 } }
+      - { id: chainlist-1-mevblocker-fast, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_MEVBLOCKER_FAST}", evm: { chainId: 1 } }
+      - { id: chainlist-1-mevblocker-noreverts, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_MEVBLOCKER_NOREVERTS}", evm: { chainId: 1 } }
+      - { id: chainlist-1-mevblocker-fullprivacy, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_MEVBLOCKER_FULLPRIVACY}", evm: { chainId: 1 } }
+      - { id: chainlist-1-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_DRPC}", evm: { chainId: 1 } }
+      - { id: chainlist-1-securerpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1_SECURERPC}", evm: { chainId: 1 } }
+
+      # OP Mainnet (10) — https://chainlist.wtf/chain/10/
+      - { id: chainlist-10-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_10_OFFICIAL}", evm: { chainId: 10 } }
+      - { id: chainlist-10-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_10_PUBLICNODE}", evm: { chainId: 10 } }
+      - { id: chainlist-10-tenderly, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_10_TENDERLY}", evm: { chainId: 10 } }
+      - { id: chainlist-10-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_10_DRPC}", evm: { chainId: 10 } }
+
+      # BNB Smart Chain (56) — https://chainlist.wtf/chain/56/
+      - { id: chainlist-56-bnb-1, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_BNB_1}", evm: { chainId: 56 } }
+      - { id: chainlist-56-bnb-2, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_BNB_2}", evm: { chainId: 56 } }
+      - { id: chainlist-56-bnb-3, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_BNB_3}", evm: { chainId: 56 } }
+      - { id: chainlist-56-bnb-4, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_BNB_4}", evm: { chainId: 56 } }
+      - { id: chainlist-56-defibit-1, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_DEFIBIT_1}", evm: { chainId: 56 } }
+      - { id: chainlist-56-defibit-2, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_DEFIBIT_2}", evm: { chainId: 56 } }
+      - { id: chainlist-56-defibit-3, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_DEFIBIT_3}", evm: { chainId: 56 } }
+      - { id: chainlist-56-defibit-4, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_DEFIBIT_4}", evm: { chainId: 56 } }
+      - { id: chainlist-56-ninicoin-1, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_NINICOIN_1}", evm: { chainId: 56 } }
+      - { id: chainlist-56-ninicoin-2, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_NINICOIN_2}", evm: { chainId: 56 } }
+      - { id: chainlist-56-ninicoin-3, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_NINICOIN_3}", evm: { chainId: 56 } }
+      - { id: chainlist-56-ninicoin-4, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_NINICOIN_4}", evm: { chainId: 56 } }
+      - { id: chainlist-56-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_56_PUBLICNODE}", evm: { chainId: 56 } }
+
+      # Polygon (137) — https://chainlist.wtf/chain/137/
+      - { id: chainlist-137-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_137_DRPC}", evm: { chainId: 137 } }
+      - { id: chainlist-137-quiknode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_137_QUIKNODE}", evm: { chainId: 137 } }
+      - { id: chainlist-137-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_137_PUBLICNODE}", evm: { chainId: 137 } }
+      - { id: chainlist-137-tenderly, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_137_TENDERLY}", evm: { chainId: 137 } }
+
+      # Base (8453) — https://chainlist.wtf/chain/8453/
+      - { id: chainlist-8453-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_8453_OFFICIAL}", evm: { chainId: 8453 } }
+      - { id: chainlist-8453-dev, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_8453_DEV}", evm: { chainId: 8453 } }
+      - { id: chainlist-8453-tenderly, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_8453_TENDERLY}", evm: { chainId: 8453 } }
+      - { id: chainlist-8453-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_8453_PUBLICNODE}", evm: { chainId: 8453 } }
+
+      # Arbitrum One (42161) — https://chainlist.wtf/chain/42161/
+      - { id: chainlist-42161-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_42161_OFFICIAL}", evm: { chainId: 42161 } }
+      - { id: chainlist-42161-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_42161_PUBLICNODE}", evm: { chainId: 42161 } }
+
+      # Avalanche C-Chain (43114) — https://chainlist.wtf/chain/43114/
+      - { id: chainlist-43114-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_43114_OFFICIAL}", evm: { chainId: 43114 } }
+      - { id: chainlist-43114-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_43114_PUBLICNODE}", evm: { chainId: 43114 } }
+
+      # Linea (59144) — https://chainlist.wtf/chain/59144/
+      - { id: chainlist-59144-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_59144_OFFICIAL}", evm: { chainId: 59144 } }
+      - { id: chainlist-59144-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_59144_PUBLICNODE}", evm: { chainId: 59144 } }
+
+      # Scroll (534352) — https://chainlist.wtf/chain/534352/
+      - { id: chainlist-534352-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_OFFICIAL}", evm: { chainId: 534352 } }
+      - { id: chainlist-534352-chainstacklabs, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_CHAINSTACKLABS}", evm: { chainId: 534352 } }
+      - { id: chainlist-534352-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_PUBLICNODE}", evm: { chainId: 534352 } }
+
+      # ========== ADDED (not chainlist): extras we merged in after eth_chainId sanity checks ==========
+      # (ids use prefix "extra-" for easy grep / removal)
+
+      # ADDED — Ethereum (1): 1RPC
+      - { id: extra-1-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_1_1RPC}", evm: { chainId: 1 } }
+
+      # ADDED — Optimism (10): 1RPC, Subquery, Tatum, Pokt/Nodies, PublicNode alt host
+      - { id: extra-10-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_10_1RPC}", evm: { chainId: 10 } }
+      - { id: extra-10-subquery, type: evm, endpoint: "${ERPC_RPC_EXTRA_10_SUBQUERY}", evm: { chainId: 10 } }
+      - { id: extra-10-tatum, type: evm, endpoint: "${ERPC_RPC_EXTRA_10_TATUM}", evm: { chainId: 10 } }
+      - { id: extra-10-pokt-nodies, type: evm, endpoint: "${ERPC_RPC_EXTRA_10_POKT_NODIES}", evm: { chainId: 10 } }
+      - { id: extra-10-publicnode-alt, type: evm, endpoint: "${ERPC_RPC_EXTRA_10_PUBLICNODE_ALT}", evm: { chainId: 10 } }
+
+      # ADDED — BNB (56): 1RPC, Blast public
+      - { id: extra-56-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_56_1RPC}", evm: { chainId: 56 } }
+      - { id: extra-56-blast, type: evm, endpoint: "${ERPC_RPC_EXTRA_56_BLAST}", evm: { chainId: 56 } }
+
+      # ADDED — Polygon (137): 1RPC, Subquery, Tatum, bor PublicNode host
+      - { id: extra-137-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_137_1RPC}", evm: { chainId: 137 } }
+      - { id: extra-137-subquery, type: evm, endpoint: "${ERPC_RPC_EXTRA_137_SUBQUERY}", evm: { chainId: 137 } }
+      - { id: extra-137-tatum, type: evm, endpoint: "${ERPC_RPC_EXTRA_137_TATUM}", evm: { chainId: 137 } }
+      - { id: extra-137-bor-publicnode, type: evm, endpoint: "${ERPC_RPC_EXTRA_137_BOR_PUBLICNODE}", evm: { chainId: 137 } }
+
+      # ADDED — Base (8453): 1RPC, Blast, Subquery, Pokt/Nodies, MeowRPC
+      - { id: extra-8453-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_8453_1RPC}", evm: { chainId: 8453 } }
+      - { id: extra-8453-blast, type: evm, endpoint: "${ERPC_RPC_EXTRA_8453_BLAST}", evm: { chainId: 8453 } }
+      - { id: extra-8453-subquery, type: evm, endpoint: "${ERPC_RPC_EXTRA_8453_SUBQUERY}", evm: { chainId: 8453 } }
+      - { id: extra-8453-pokt-nodies, type: evm, endpoint: "${ERPC_RPC_EXTRA_8453_POKT_NODIES}", evm: { chainId: 8453 } }
+      - { id: extra-8453-meowrpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_8453_MEOWRPC}", evm: { chainId: 8453 } }
+
+      # ADDED — Arbitrum (42161): 1RPC, Blast, Subquery, Pokt/Nodies, PublicNode alt, MeowRPC
+      - { id: extra-42161-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_1RPC}", evm: { chainId: 42161 } }
+      - { id: extra-42161-blast, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_BLAST}", evm: { chainId: 42161 } }
+      - { id: extra-42161-subquery, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_SUBQUERY}", evm: { chainId: 42161 } }
+      - { id: extra-42161-pokt-nodies, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_POKT_NODIES}", evm: { chainId: 42161 } }
+      - { id: extra-42161-publicnode-alt, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_PUBLICNODE_ALT}", evm: { chainId: 42161 } }
+      - { id: extra-42161-meowrpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_42161_MEOWRPC}", evm: { chainId: 42161 } }
+
+      # ADDED — Avalanche (43114): 1RPC, dRPC, PublicNode alts
+      - { id: extra-43114-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_43114_1RPC}", evm: { chainId: 43114 } }
+      - { id: extra-43114-drpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_43114_DRPC}", evm: { chainId: 43114 } }
+      - { id: extra-43114-publicnode-alt, type: evm, endpoint: "${ERPC_RPC_EXTRA_43114_PUBLICNODE_ALT}", evm: { chainId: 43114 } }
+      - { id: extra-43114-cchain-publicnode, type: evm, endpoint: "${ERPC_RPC_EXTRA_43114_CCHAIN_PUBLICNODE}", evm: { chainId: 43114 } }
+
+      # ADDED — Linea (59144): 1RPC, dRPC
+      - { id: extra-59144-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_59144_1RPC}", evm: { chainId: 59144 } }
+      - { id: extra-59144-drpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_59144_DRPC}", evm: { chainId: 59144 } }
+
+      # ADDED — Scroll (534352): 1RPC
+      - { id: extra-534352-1rpc, type: evm, endpoint: "${ERPC_RPC_EXTRA_534352_1RPC}", evm: { chainId: 534352 } }
