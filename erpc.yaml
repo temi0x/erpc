@@ -186,6 +186,156 @@ projects:
           hedge:
             delay: 2000ms
             maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 100
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 250
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 324
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 592
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 1101
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 1284
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 252
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 7000
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 81457
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
+      - architecture: evm
+        evm:
+          chainId: 7777777
+        failsafe:
+          timeout:
+            duration: 30s
+          retry:
+            maxAttempts: 3
+            delay: 500ms
+            backoffMaxDelay: 10s
+            backoffFactor: 0.3
+            jitter: 500ms
+          hedge:
+            delay: 2000ms
+            maxCount: 2
 
     upstreams:
       # ========== chainlist.wtf (primary) — omit ${INFURA_API_KEY} / ${ALCHEMY_API_KEY} rows ==========
@@ -254,6 +404,49 @@ projects:
       - { id: chainlist-534352-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_OFFICIAL}", evm: { chainId: 534352 } }
       - { id: chainlist-534352-chainstacklabs, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_CHAINSTACKLABS}", evm: { chainId: 534352 } }
       - { id: chainlist-534352-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_534352_PUBLICNODE}", evm: { chainId: 534352 } }
+
+      # Gnosis (100) — https://chainlist.wtf/chain/100/
+      - { id: chainlist-100-gnosischain, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_100_GNOSISCHAIN}", evm: { chainId: 100 } }
+      - { id: chainlist-100-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_100_PUBLICNODE}", evm: { chainId: 100 } }
+      - { id: chainlist-100-ankr, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_100_ANKR}", evm: { chainId: 100 } }
+
+      # Fantom Opera (250) — https://chainlist.wtf/chain/250/
+      - { id: chainlist-250-ftm-tools, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_250_FTM_TOOLS}", evm: { chainId: 250 } }
+      - { id: chainlist-250-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_250_PUBLICNODE}", evm: { chainId: 250 } }
+      - { id: chainlist-250-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_250_DRPC}", evm: { chainId: 250 } }
+
+      # zkSync Mainnet (324) — https://chainlist.wtf/chain/324/
+      - { id: chainlist-324-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_324_OFFICIAL}", evm: { chainId: 324 } }
+      - { id: chainlist-324-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_324_DRPC}", evm: { chainId: 324 } }
+
+      # Astar (592) — https://chainlist.wtf/chain/592/
+      - { id: chainlist-592-astar, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_592_ASTAR}", evm: { chainId: 592 } }
+
+      # Polygon zkEVM (1101) — https://chainlist.wtf/chain/1101/
+      - { id: chainlist-1101-zkevm-rpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1101_ZKEVM_RPC}", evm: { chainId: 1101 } }
+      - { id: chainlist-1101-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1101_DRPC}", evm: { chainId: 1101 } }
+
+      # Moonbeam (1284) — https://chainlist.wtf/chain/1284/
+      - { id: chainlist-1284-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1284_OFFICIAL}", evm: { chainId: 1284 } }
+      - { id: chainlist-1284-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1284_PUBLICNODE}", evm: { chainId: 1284 } }
+      - { id: chainlist-1284-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_1284_DRPC}", evm: { chainId: 1284 } }
+
+      # Fraxtal (252) — https://chainlist.wtf/chain/252/
+      - { id: chainlist-252-frax, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_252_FRAX}", evm: { chainId: 252 } }
+      - { id: chainlist-252-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_252_PUBLICNODE}", evm: { chainId: 252 } }
+
+      # ZetaChain Mainnet (7000) — https://chainlist.wtf/chain/7000/
+      - { id: chainlist-7000-blockpi, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_7000_BLOCKPI}", evm: { chainId: 7000 } }
+      - { id: chainlist-7000-drpc, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_7000_DRPC}", evm: { chainId: 7000 } }
+      - { id: chainlist-7000-blastapi, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_7000_BLASTAPI}", evm: { chainId: 7000 } }
+
+      # Blast (81457) — https://chainlist.wtf/chain/81457/
+      - { id: chainlist-81457-official, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_81457_OFFICIAL}", evm: { chainId: 81457 } }
+      - { id: chainlist-81457-publicnode, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_81457_PUBLICNODE}", evm: { chainId: 81457 } }
+      - { id: chainlist-81457-ankr, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_81457_ANKR}", evm: { chainId: 81457 } }
+
+      # Zora (7777777) — https://chainlist.wtf/chain/7777777/
+      - { id: chainlist-7777777-zora, type: evm, endpoint: "${ERPC_RPC_CHAINLIST_7777777_ZORA}", evm: { chainId: 7777777 } }
 
       # ========== ADDED (not chainlist): extras we merged in after eth_chainId sanity checks ==========
       # (ids use prefix "extra-" for easy grep / removal)
