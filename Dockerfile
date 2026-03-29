@@ -48,7 +48,8 @@ COPY pnpm* /temp/dev/
 COPY package.json /temp/dev/package.json
 
 # Install everything and build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store cd /temp/dev &&  pnpm install --frozen-lockfile
+# (No BuildKit cache mount here: platforms like Railway require id=s/<service-id>-…; plain RUN is portable.)
+RUN cd /temp/dev && pnpm install --frozen-lockfile
 RUN cd /temp/dev && pnpm build
 
 # Stage where we will install prod dependencies only
@@ -60,7 +61,7 @@ COPY pnpm* /temp/prod/
 COPY package.json /temp/prod/package.json
 
 # Install every prod dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store cd /temp/prod && pnpm install --prod --frozen-lockfile
+RUN cd /temp/prod && pnpm install --prod --frozen-lockfile
 
 # Create symlink stage (for backwards compatibility with earlier image file structure)
 FROM alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 AS symlink
